@@ -1,7 +1,13 @@
 services:
   - type: web
-    name: believers-college
+    name: django-college-project
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn college_project.wsgi:application
     plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+      python manage.py migrate
+    startCommand: gunicorn college_project.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
