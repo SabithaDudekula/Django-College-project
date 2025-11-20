@@ -1,0 +1,52 @@
+{% extends "mainapp/base.html" %}
+
+{% block content %}
+<div style="
+    background-image: url('https://www.edinburghcollege.ac.uk/media/i13fu5m1/milton_granton_068.jpg?center=0.49762618357060245,0.51118166925454267&mode=crop&width=1920&height=600&rnd=132717824920400000');
+    background-size: cover;
+    min-height: 100vh;
+    padding: 50px 0;
+">
+    <div style="
+        width: 70%;
+        margin:auto;
+        background: rgba(255,255,255,0.95);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow:0 0 15px rgba(0,0,0,0.3);
+    ">
+        <h2 style="text-align:center;">HOD List</h2>
+
+        <a href="{% url 'hod_add' %}"
+           style="background:#333; color:white; padding:10px 15px; border-radius:5px; text-decoration:none;">
+            + Add HOD
+        </a>
+
+        <br><br>
+
+        <table style="width:100%; border-collapse:collapse;">
+            <tr style="background:#333; color:white;">
+                <th style="padding:10px;">ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for h in hods %}
+            <tr>
+                <td style="padding:10px; border-bottom:1px solid #ccc;">{{ h.id }}</td>
+                <td style="border-bottom:1px solid #ccc;">{{ h.name }}</td>
+                <td style="border-bottom:1px solid #ccc;">{{ h.email }}</td>
+                <td style="border-bottom:1px solid #ccc;">{{ h.department.name }}</td>
+                <td style="border-bottom:1px solid #ccc;">
+                    <a href="{% url 'hod_edit' h.id %}">Edit</a> |
+                    <a href="{% url 'hod_delete' h.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+{% endblock %}

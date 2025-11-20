@@ -1,0 +1,52 @@
+{% extends "mainapp/base.html" %}
+
+{% block content %}
+<div style="
+    background-image: url('https://umbc.edu/wp-content/uploads/2022/02/UMBC-Campus-drone2020-0415.jpg');
+    background-size: cover;
+    min-height: 100vh;
+    padding: 50px 0;
+">
+
+    <div style="
+        width: 70%;
+        margin: auto;
+        background: rgba(255,255,255,0.95);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    ">
+
+        <h2 style="text-align:center;">Department List</h2>
+
+        <a href="{% url 'department_add' %}"
+           style="background:#333; color:white; padding:10px 15px; border-radius:5px; text-decoration:none;">
+            + Add Department
+        </a>
+
+        <br><br>
+
+        <table style="width:100%; border-collapse:collapse;">
+            <tr style="background:#333; color:white;">
+                <th style="padding:10px;">ID</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for d in departments %}
+            <tr>
+                <td style="padding:10px; border-bottom:1px solid #ccc;">{{ d.id }}</td>
+                <td style="border-bottom:1px solid #ccc;">{{ d.name }}</td>
+                <td style="border-bottom:1px solid #ccc;">{{ d.code }}</td>
+                <td style="border-bottom:1px solid #ccc;">
+                    <a href="{% url 'department_edit' d.id %}">Edit</a> |
+                    <a href="{% url 'department_delete' d.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+{% endblock %}

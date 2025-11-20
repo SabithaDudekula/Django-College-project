@@ -1,0 +1,41 @@
+{% extends "mainapp/base.html" %}
+
+{% block content %}
+<div style="
+    background-image:url('https://umbc.edu/wp-content/uploads/2022/02/UMBC-Campus-drone2020-0415.jpg');
+    background-size:cover;
+    min-height:100vh;
+    padding:50px 0;
+">
+
+    <div style="
+        width:40%;
+        margin:auto;
+        background:rgba(255,255,255,0.95);
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 0 15px rgba(0,0,0,0.3);
+    ">
+
+        <h2 style="text-align:center;">Edit Department</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Name:</label>
+            <input type="text" name="name" value="{{ department.name }}" required
+                   style="width:100%; padding:10px;"><br><br>
+
+            <label>Code:</label>
+            <input type="text" name="code" value="{{ department.code }}" required
+                   style="width:100%; padding:10px;"><br><br>
+
+            <button type="submit"
+                style="width:100%; padding:10px; background:#333; color:white; border:none; border-radius:5px;">
+                Update
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

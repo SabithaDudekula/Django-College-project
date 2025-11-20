@@ -1,0 +1,53 @@
+{% extends "mainapp/base.html" %}
+
+{% block content %}
+<div style="
+    background-image: url('https://wallpaperaccess.com/full/1209535.jpg');
+    background-size: cover;
+    min-height: 100vh;
+    padding: 50px 0;
+">
+    <div style="
+        width: 70%;
+        margin:auto;
+        background: rgba(255,255,255,0.95);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow:0 0 15px rgba(0,0,0,0.3);
+    ">
+
+        <h2 style="text-align:center;">Student List</h2>
+
+        <a href="{% url 'student_add' %}"
+           style="background:#333; color:white; padding:10px 15px; border-radius:5px; text-decoration:none;">
+            + Add Student
+        </a>
+
+        <br><br>
+
+        <table style="width:100%; border-collapse:collapse;">
+            <tr style="background:#333; color:white;">
+                <th style="padding:10px;">ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Actions</th>
+            </tr>
+
+            {% for s in students %}
+            <tr>
+                <td style="padding:10px; border-bottom:1px solid #ccc;">{{ s.id }}</td>
+                <td style="border-bottom:1px solid #ccc;">{{ s.name }}</td>
+                <td style="border-bottom:1px solid #ccc;">{{ s.email }}</td>
+                <td style="border-bottom:1px solid #ccc;">{{ s.department.name }}</td>
+                <td style="border-bottom:1px solid #ccc;">
+                    <a href="{% url 'student_edit' s.id %}">Edit</a> |
+                    <a href="{% url 'student_delete' s.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+{% endblock %}

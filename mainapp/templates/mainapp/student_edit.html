@@ -1,0 +1,47 @@
+{% extends "mainapp/base.html" %}
+
+{% block content %}
+<div style="
+    background-image:url('https://wallpaperaccess.com/full/1209535.jpg');
+    background-size:cover;
+    min-height:100vh;
+    padding:50px 0;
+">
+    <div style="
+        width:40%;
+        margin:auto;
+        background:rgba(255,255,255,0.95);
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 0 15px rgba(0,0,0,0.3);
+    ">
+
+        <h2 style="text-align:center;">Edit Student</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Name:</label>
+            <input type="text" name="name" value="{{ student.name }}" required style="width:100%; padding:10px;"><br><br>
+
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ student.email }}" required style="width:100%; padding:10px;"><br><br>
+
+            <label>Department:</label>
+            <select name="department" style="width:100%; padding:10px;">
+                {% for d in departments %}
+                <option value="{{ d.id }}" {% if student.department.id == d.id %}selected{% endif %}>
+                    {{ d.name }}
+                </option>
+                {% endfor %}
+            </select><br><br>
+
+            <button type="submit" style="
+                width:100%; padding:10px; background:#333; color:white; border:none; border-radius:5px;">
+                Update
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
