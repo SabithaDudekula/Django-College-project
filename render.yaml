@@ -4,11 +4,11 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn college_project.wsgi:application
+    startCommand: |
+      python manage.py migrate &&
+      gunicorn college_project.wsgi:application
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.12
       - key: DJANGO_SETTINGS_MODULE
         value: college_project.settings
-    postDeployCommand:
-      - python manage.py migrate
